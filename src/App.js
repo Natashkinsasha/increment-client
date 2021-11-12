@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import {Button, Container, Divider, Grid, Header, Label} from 'semantic-ui-react'
+import {decrement, increment, getRandomInteger} from "./util";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+       const [number, setNumber] = useState(getRandomInteger(-100, 100));
+
+      return (
+          <Container style={{ marginTop: '3em' }}>
+              <Header as='h1'>Counter</Header>
+              <Grid columns='equal'>
+                  <Grid.Column>
+                      <Button onClick={() => {
+                          setNumber(increment(number));
+                      }}>Increment</Button>
+                      <Button onClick={()=>{
+                          setNumber(decrement(number));
+                      }}>Decrement</Button>
+
+                      <Button onClick={()=>{
+                          setNumber(getRandomInteger(-100, 100));
+                      }}>Random</Button>
+
+                      <Divider />
+
+                      <Label circular color='red'>
+                          {number}
+                      </Label>
+
+                  </Grid.Column>
+              </Grid>
+          </Container>
+      );
 }
 
 export default App;
